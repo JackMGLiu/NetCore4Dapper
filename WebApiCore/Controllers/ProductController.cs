@@ -88,7 +88,8 @@ namespace WebApiCore.Controllers
         [HttpGet("getlist")]
         public async Task<IActionResult> ProjectList()
         {
-            return Ok("111222");
+            var data = await _productRepository.GetAllListAsync();
+            return Ok(data);
         }
     }
 }

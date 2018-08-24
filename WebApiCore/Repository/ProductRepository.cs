@@ -80,5 +80,10 @@ namespace WebApiCore.Repository
                 return await conn.ExecuteAsync(sql, prod) > 0;
             }
         }
+
+        public Task<IEnumerable<Product>> GetAllListAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

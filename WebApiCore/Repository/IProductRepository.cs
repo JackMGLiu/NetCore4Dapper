@@ -11,5 +11,7 @@ namespace WebApiCore.Repository
         Task<Product> GetByIDAsync(int id);
         Task<bool> DeleteAsync(int id);
         Task<bool> UpdateAsync(Product prod);
+
+        Task<IEnumerable<Product>> GetAllListAsync();
     }
 }

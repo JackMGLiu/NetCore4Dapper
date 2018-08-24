@@ -40,5 +40,15 @@ namespace WebApiCore.Repository
         {
             return await _context.ModifyEntityAsync(prod);
         }
+
+        public async Task<IEnumerable<Product>> GetAllListAsync()
+        {
+            var data = await _context.QueryAsync<Product, Category, Product>("select * from Product as p left join Category as c on p.CategoryId=c.Id", (p, c) =>
+            {
+                p.Category = c;
+                return p;
+            }, "CategoryId");
+            return data;
+        }
     }
 }

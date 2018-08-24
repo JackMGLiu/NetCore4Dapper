@@ -40,12 +40,24 @@ namespace WebApiCore.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Product prod)
         {
+            /*
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
             await _productRepository.AddAsync(prod);
+            return NoContent();
+            */
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            using (var uow = _uowFactory.Create())
+            {
+                await _productRepository.AddAsync(prod);
+                uow.SaveChanges();
+            }
             return NoContent();
         }
 
@@ -71,6 +83,12 @@ namespace WebApiCore.Controllers
         {
             await _productRepository.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpGet("getlist")]
+        public async Task<IActionResult> ProjectList()
+        {
+            return Ok("111222");
         }
     }
 }

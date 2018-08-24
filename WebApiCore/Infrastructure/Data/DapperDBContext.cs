@@ -87,6 +87,17 @@ namespace WebApiCore.Infrastructure.Data
 
         #region Dapper Execute & Query
 
+        public async Task<bool> AddEntityAsync<T>(T entity) where T : class
+        {
+            return await _connection.InsertAsync(entity, _transaction, _commandTimeout) > 0;
+        }
+
+        public async Task<bool> ModifyEntityAsync<T>(T entity) where T : class
+        {
+            return await _connection.UpdateAsync(entity, _transaction, _commandTimeout);
+        }
+
+
         public async Task<int> ExecuteAsync(string sql, object param = null, CommandType commandType = CommandType.Text)
         {
             return await _connection.ExecuteAsync(sql, param, _transaction, _commandTimeout, commandType);

@@ -18,7 +18,7 @@ namespace WebApiCore.Repository
 
         public async Task<bool> AddAsync(Product prod)
         {
-            throw new NotImplementedException();
+            return await _context.AddEntityAsync(prod);
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync()
@@ -38,7 +38,7 @@ namespace WebApiCore.Repository
 
         public async Task<bool> UpdateAsync(Product prod)
         {
-            throw new NotImplementedException();
+            return await _context.ModifyEntityAsync(prod);
         }
     }
 }
